@@ -7,9 +7,19 @@ from llm import apply_commit
 app = typer.Typer()
 
 
+def get_original_code(filename):
+    with open(filename) as file:
+        return file.read()
+
+
+def splice_new_code(filename, code):
+    with open(filename, "w") as file:
+        file.write(code)
+
+
 @app.command()
 async def commit(
-        target: str,
+        filename: str,
         commit_message: str,
         api_key: Optional[str] = typer.Option(None, envvar="OPENAI_API_KEY"),
 ):
@@ -19,8 +29,10 @@ async def commit(
         )
         raise typer.Exit(code=1)
 
-    code = await apply_commit(target, commit_message)
-    typer.echo(f"Generated code:\n{code}")
+    original_code = get_original_code(filename)
+    code = await apply_commit(original_code, commit_message)
+    splice_new_code(filename, code)
+    typer.echo(f"Updated {filename}")
 
 
 if __name__ == "__main__":
