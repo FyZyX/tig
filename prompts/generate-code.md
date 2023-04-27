@@ -1,6 +1,4 @@
-Here is my code:
-~
-$code
-~
-
-Please apply this commit message: `$commit`
+{
+  "code": "$code",
+  "commit": "$commit"
+}

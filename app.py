@@ -1,3 +1,4 @@
+import json
 from typing import Optional
 
 import typer
@@ -31,7 +32,8 @@ def commit(
 
     original_code = get_original_code(filename)
     code = apply_commit(original_code, commit_message)
-    splice_new_code(filename, code)
+    snippet = json.loads(code)["snippet"]
+    splice_new_code(filename, snippet)
     typer.echo(f"Updated {filename}")
 
 
