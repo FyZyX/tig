@@ -24,7 +24,7 @@ class Prompt:
         return template.substitute(**kwargs)
 
 
-async def apply_commit(code, commit_message: str) -> str:
+def apply_commit(code, commit_message: str) -> str:
     messages = [
         {"role": "system", "content": Prompt("context").render()},
         {"role": "user", "content": Prompt("generate-code").render(
@@ -33,7 +33,7 @@ async def apply_commit(code, commit_message: str) -> str:
         )},
     ]
 
-    response = await openai.ChatCompletion.acreate(
+    response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=messages,
     )
