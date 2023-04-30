@@ -47,7 +47,6 @@ $ python app.py commit -m "add a function that generates random numbers" -t exam
 Here `app.py` acts as a command line tool similar to `git`.
 However, in this simple model, you must specify the target file you want to affect, in this case `example.py`,
 as well as the commit message you want to apply.
-In future versions, we will align the CLI with commands and options that are more similar to VCS like `git`.
 
 > **NOTE:** This tool is eventually meant to be installed on the client system and run within a project directory,
 > but at this stage we're simply running it as if `tig` itself is the project directory. 
