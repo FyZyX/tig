@@ -19,6 +19,11 @@ def splice_new_code(filename, code):
 
 
 @app.command()
+def init():
+    pass
+
+
+@app.command()
 def commit(
         filename: str,
         commit_message: str,
@@ -35,6 +40,21 @@ def commit(
     snippet = json.loads(code)["snippet"]
     splice_new_code(filename, snippet)
     typer.echo(f"Updated {filename}")
+
+
+@app.command()
+def status():
+    pass
+
+
+@app.command()
+def diff():
+    pass
+
+
+@app.command()
+def apply():
+    pass
 
 
 if __name__ == "__main__":
