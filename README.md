@@ -41,11 +41,11 @@ if __name__ == '__main__':
 ```
 - Open a command prompt and run the app like so:
 ```shell
-$ python app.py example.py "add a function that generates random numbers"
+$ python app.py commit -m "add a function that generates random numbers" -t example.py
 ```
 
 Here `app.py` acts as a command line tool similar to `git`.
-However, in this simple model, you must specify the file you want to affect, in this case `example.py`
+However, in this simple model, you must specify the target file you want to affect, in this case `example.py`,
 as well as the commit message you want to apply.
 In future versions, we will align the CLI with commands and options that are more similar to VCS like `git`.
 

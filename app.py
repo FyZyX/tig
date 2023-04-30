@@ -25,8 +25,9 @@ def init():
 
 @app.command()
 def commit(
-        filename: str,
-        commit_message: str,
+        target: str = typer.Option(..., "--target", "-t", help="Target file"),
+        commit_message: str = typer.Option(..., "--message", "-m",
+                                           help="Commit message"),
         api_key: Optional[str] = typer.Option(None, envvar="OPENAI_API_KEY"),
 ):
     if api_key is None:
@@ -35,11 +36,11 @@ def commit(
         )
         raise typer.Exit(code=1)
 
-    original_code = get_original_code(filename)
+    original_code = get_original_code(target)
     code = apply_commit(original_code, commit_message)
     snippet = json.loads(code)["snippet"]
-    splice_new_code(filename, snippet)
-    typer.echo(f"Updated {filename}")
+    splice_new_code(target, snippet)
+    typer.echo(f"Updated {target}")
 
 
 @app.command()
