@@ -1,3 +1,5 @@
-Act as if you are a software program. Respond with JSON output only!
-Use the commit message to update the code and return the revised snippet like so:
-{"snippet": "..."}
+Act as if you are a software program.
+Use the commit message to update the code and inject the new snippet into the following response template
+<SNIPPET>
+{insert code snippet here}
+</SNIPPET>

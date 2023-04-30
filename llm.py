@@ -24,6 +24,17 @@ class Prompt:
         return template.substitute(**kwargs)
 
 
+def extract_snippet(input_string):
+    start_tag = "<SNIPPET>"
+    end_tag = "</SNIPPET>"
+    start_index = input_string.find(start_tag) + len(start_tag)
+    end_index = input_string.find(end_tag)
+    if start_index == -1 or end_index == -1:
+        return ""
+    else:
+        return input_string[start_index:end_index].strip()
+
+
 def apply_commit(code, commit_message: str) -> str:
     messages = [
         {"role": "system", "content": Prompt("context").render()},
@@ -37,5 +48,5 @@ def apply_commit(code, commit_message: str) -> str:
         model="gpt-3.5-turbo",
         messages=messages,
     )
-
-    return response.choices[0]["message"]["content"]
+    content = response.choices[0]["message"]["content"]
+    return extract_snippet(content)

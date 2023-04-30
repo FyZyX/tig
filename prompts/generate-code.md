@@ -1,4 +1,5 @@
-{
-  "code": "$code",
-  "commit": "$commit"
-}
+ORIGINAL CODE:
+$code
+
+COMMIT MESSAGE:
+$commit

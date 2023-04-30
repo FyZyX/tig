@@ -37,8 +37,7 @@ def commit(
         raise typer.Exit(code=1)
 
     original_code = get_original_code(target)
-    code = apply_commit(original_code, commit_message)
-    snippet = json.loads(code)["snippet"]
+    snippet = apply_commit(original_code, commit_message)
     splice_new_code(target, snippet)
     typer.echo(f"Updated {target}")
 
