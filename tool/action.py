@@ -8,6 +8,37 @@ def list_modules() -> list[model.entity.Module]:
     pass
 
 
+def inspect_module(module_path: str) -> model.entity.Module:
+    """
+    Takes the path to a Python module file (.py) and returns
+    a Module object that includes classes, functions,
+    and imports from that module.
+    """
+    pass
+
+
+def inspect_class(module_path: str, class_name: str) -> model.entity.Class:
+    """
+    Takes the path to a Python module file and a class name,
+    returns a Class object that includes information about
+    its methods, fields, and inheritance.
+    """
+    pass
+
+
+def inspect_function(
+        module_path: str,
+        class_name: str | None,
+        function_name: str,
+) -> model.entity.Function:
+    """
+    Takes the path to a Python module file, an optional class name,
+    and a function name, returns a Function object that includes
+    the function signature and source code.
+    """
+    pass
+
+
 # Gets a specific module's details
 def get_module(module_name: str) -> model.entity.Module:
     pass
