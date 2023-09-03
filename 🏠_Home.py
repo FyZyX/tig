@@ -1,22 +1,7 @@
-import openai
 import streamlit
 
-import config
 import llm.prompt
-
-openai.api_key = config.OPENAI_API_KEY
-
-
-def get_completion(system_prompt, message):
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": message}
-        ]
-    )
-
-    return completion.choices[0].message["content"]
+import llm.query
 
 
 def main():
@@ -36,7 +21,7 @@ def main():
 
     with streamlit.chat_message("assistant"):
         with streamlit.spinner("Thinking..."):
-            response = get_completion(system_prompt, text)
+            response = llm.query.get_completion(system_prompt, text)
         streamlit.markdown(response)
 
 
