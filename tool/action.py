@@ -1,13 +1,15 @@
 from typing import Optional
 
+import model.entity
+
 
 # Lists all available modules in the codebase
-def list_modules() -> list[str]:
+def list_modules() -> list[model.entity.Module]:
     pass
 
 
 # Gets a specific module's details
-def get_module(module_name: str) -> dict[str, str | list[str]]:
+def get_module(module_name: str) -> model.entity.Module:
     pass
 
 
@@ -15,7 +17,7 @@ def get_module(module_name: str) -> dict[str, str | list[str]]:
 def get_class(
         module_name: str,
         class_name: str,
-) -> dict[str, str | list[str]]:
+) -> model.entity.Class:
     pass
 
 
@@ -24,7 +26,7 @@ def get_function(
         module_name: str,
         class_name: Optional[str],
         function_name: str,
-) -> dict[str, str]:
+) -> model.entity.Function:
     pass
 
 
