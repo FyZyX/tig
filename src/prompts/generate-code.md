@@ -1,5 +1,0 @@
-ORIGINAL CODE:
-$code
-
-COMMIT MESSAGE:
-$commit
