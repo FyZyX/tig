@@ -13,6 +13,10 @@ def parse_gitignore(gitignore_path):
     return excludes
 
 
+def should_exclude(entry: Path, excludes: list[str]) -> bool:
+    return any(fnmatch.fnmatch(entry.name, pattern) for pattern in excludes)
+
+
 def project_structure(
         path: Path,
         indent: str = "",
@@ -26,7 +30,7 @@ def project_structure(
 
     excludes = excludes or []
     for entry in sorted(path.iterdir(), key=lambda e: e.name):
-        if any(fnmatch.fnmatch(entry.name, pattern) for pattern in excludes):
+        if should_exclude(entry, excludes):
             continue
 
         print(f"{indent}{entry.name}")
@@ -40,13 +44,12 @@ def main():
         print(f"{codebase} is not a directory.")
         return
 
-    excludes = ["*.git", "__pycache__", "*.pyc", ".idea", "venv"]
+    excludes = ["*.git", "__pycache__", "*.pyc", ".idea", "venv", ".env*"]
 
     gitignore_path = codebase / ".gitignore"
     if gitignore_path.is_file():
         ignored = parse_gitignore(gitignore_path)
         excludes.extend(ignored)
-    print(excludes)
 
     project_structure(codebase, depth=2, excludes=excludes)
 
