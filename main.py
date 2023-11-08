@@ -2,6 +2,17 @@ from pathlib import Path
 import fnmatch
 
 
+def parse_gitignore(gitignore_path):
+    excludes = []
+    with open(gitignore_path, "r") as file:
+        for line in file:
+            line = line.strip()
+            if not line or line.startswith("#"):
+                continue
+            excludes.append(line)
+    return excludes
+
+
 def project_structure(
         path: Path,
         indent: str = '',
@@ -29,7 +40,15 @@ def main():
     if not codebase.is_dir():
         print(f"{codebase} is not a directory.")
         return
+
     excludes = ["*.git", "__pycache__", "*.pyc", ".idea", "venv"]
+
+    gitignore_path = codebase / ".gitignore"
+    if gitignore_path.is_file():
+        ignored = parse_gitignore(gitignore_path)
+        excludes.extend(ignored)
+    print(excludes)
+
     project_structure(codebase, depth=2, excludes=excludes)
 
 
