@@ -16,10 +16,10 @@ def parse_gitignore(gitignore_path):
 def project_structure(
         path: Path,
         indent: str = '',
-        depth: int = 1,
+        depth: int = None,
         excludes: list[str] = None,
 ):
-    if depth <= 0:
+    if depth is not None and depth <= 0:
         return
 
     excludes = excludes or []
@@ -32,6 +32,7 @@ def project_structure(
 
         print(f"{indent}{entry.name}")
         if entry.is_dir():
+            depth = None if depth is None else depth - 1
             project_structure(entry, indent + '    ', depth, excludes)
 
 
