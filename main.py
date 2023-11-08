@@ -15,25 +15,23 @@ def parse_gitignore(gitignore_path):
 
 def project_structure(
         path: Path,
-        indent: str = '',
-        depth: int = None,
+        indent: str = "",
+        depth: int | None = None,
         excludes: list[str] = None,
 ):
-    if depth is not None and depth <= 0:
-        return
+    if depth is not None:
+        if depth <= 0:
+            return
+        depth -= 1
 
     excludes = excludes or []
-
-    depth -= 1
-
     for entry in sorted(path.iterdir(), key=lambda e: e.name):
         if any(fnmatch.fnmatch(entry.name, pattern) for pattern in excludes):
             continue
 
         print(f"{indent}{entry.name}")
         if entry.is_dir():
-            depth = None if depth is None else depth - 1
-            project_structure(entry, indent + '    ', depth, excludes)
+            project_structure(entry, indent + "\t", depth, excludes)
 
 
 def main():
