@@ -5,10 +5,6 @@ import llm.query
 
 
 def main():
-    persona_names = llm.prompt.available_personas()
-    persona_name = streamlit.selectbox("Persona", options=persona_names)
-    persona = llm.prompt.load_persona(persona_name)
-
     text = streamlit.chat_input()
 
     if not text:
@@ -17,7 +13,11 @@ def main():
     with streamlit.chat_message("user"):
         streamlit.markdown(text)
 
-    system_prompt = persona
+    variables = {
+        "project_structure": "",
+        "commit_message": text,
+    }
+    system_prompt = llm.prompt.render_template("plan", variables)
 
     with streamlit.chat_message("assistant"):
         with streamlit.spinner("Thinking..."):
