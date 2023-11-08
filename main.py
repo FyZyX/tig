@@ -1,21 +1,17 @@
 from pathlib import Path
 
-from analyze import project
+import codebase.project
 
 
 def main():
-    codebase = Path("~/Projects/github/justin-time").expanduser()
-    if not codebase.is_dir():
+    path = Path("~/Projects/github/justin-time").expanduser()
+    if not path.is_dir():
         print(f"{codebase} is not a directory.")
         return
 
-    excludes = project.exclusion_patterns(codebase)
+    project = codebase.project.Project(path)
 
-    project.structure(
-        codebase,
-        depth=2,
-        excludes=excludes,
-    )
+    project.structure(depth=2)
 
 
 if __name__ == '__main__':
