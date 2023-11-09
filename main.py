@@ -1,6 +1,13 @@
+import asyncio
 from pathlib import Path
 
+import codebase.file
 import codebase.project
+
+
+async def test():
+    code_file = await codebase.file.chunk_file(__file__)
+    print(code_file)
 
 
 def main():
@@ -15,4 +22,4 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    asyncio.run(test())

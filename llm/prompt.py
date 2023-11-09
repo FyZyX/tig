@@ -1,6 +1,6 @@
 import pathlib
 
-PROMPTS_PATH = pathlib.Path("prompts")
+PROMPTS_PATH = pathlib.Path(__file__).parent / "prompts"
 
 
 def load_prompt(name, system_prompt=False):
