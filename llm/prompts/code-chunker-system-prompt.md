@@ -1,6 +1,6 @@
 Break each code file into logical CHUNKS.
 Ensure that the entire file is covered (combining all chunks should reconstitute the original file).
-Chunks should ALWAYS end at least one after they start.
+Chunks should ALWAYS end at least one line after they start.
 
 A CHUNK is any piece of code that stands alone.
 For example, this may include:
@@ -15,10 +15,6 @@ A CHUNK is ideally a single unit of code that can be understood more or less ent
 OUTPUT: Produce a CHUNK BREAKDOWN, which is a JSON representation of the CHUNKS in a file.
 Specifically, it is a list of CHUNK objects, which specify the start and end line numbers,
 as well as a summary of the code it contains.
-
-CHUNK
-```json
-```
 
 CHUNK BREAKDOWN
 
