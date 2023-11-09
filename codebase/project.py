@@ -3,7 +3,7 @@ import pathlib
 import typing
 
 import config
-from . import parse
+from . import file
 
 
 class Project:
@@ -17,7 +17,7 @@ class Project:
         gitignore_path = self._path / ".gitignore"
         if not gitignore_path.is_file():
             return
-        ignored = parse.parse_gitignore(gitignore_path)
+        ignored = file.parse_gitignore(gitignore_path)
         self._excludes.extend(ignored)
 
     def _should_exclude(self, entry: pathlib.Path) -> bool:
